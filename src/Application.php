@@ -16,17 +16,32 @@ declare(strict_types=1);
  */
 namespace App;
 
+use App\Command\DropClickHouseTableCommand;
+use App\Command\InitClickHouseTableCommand;
+use App\Command\ParseHandler\ParseHandler;
+use App\Command\ParseHandler\Middlewares\DTOMapperMiddleware;
+use App\Command\ParseHandler\Middlewares\SendRequestsMiddleware;
+use App\Command\ParseHandler\Middlewares\RequestBuilderMiddleware;
+use App\Command\ParseHandler\ParseRequestFactory;
+use App\Command\ParseProductsCommand;
+use App\Contracts\ClickHouseClient;
+use App\Model\Table\WbProductsClickHouseTable;
+use App\Services\WbParser\Repository\WbProductsRepository;
+use App\Services\WbParser\Repository\WbProductsRepositoryInterface;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
+use Cake\Http\Client;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Eggheads\CakephpClickHouse\ClickHouse;
+use Psr\Http\Client\ClientInterface;
 
 /**
  * Application setup class.
@@ -113,6 +128,29 @@ class Application extends BaseApplication
      */
     public function services(ContainerInterface $container): void
     {
+        $container->add(ClientInterface::class, Client::class);
+        $container->add(ClickHouseClient::class, ClickHouse::getInstance()->getClient());
+        $container->add(ParseRequestFactory::class);
+        $container->add(WbProductsRepositoryInterface::class, WbProductsRepository::class)
+            ->addArgument(WbProductsClickHouseTable::getInstance());
+        $container->add(ParseHandler::class)
+            ->addArgument(WbProductsRepositoryInterface::class);
+        $container->add(RequestBuilderMiddleware::class);
+        $container->add(SendRequestsMiddleware::class)
+            ->addArgument(ClientInterface::class);
+        $container->add(DTOMapperMiddleware::class);
+
+        $container->add(InitClickHouseTableCommand::class)
+            ->addArgument($container->get(ClickHouseClient::class));
+        $container->add(DropClickHouseTableCommand::class)
+            ->addArgument($container->get(ClickHouseClient::class));
+        $container->add(ParseProductsCommand::class)
+            ->addArgument($container->get(ParseHandler::class))
+            ->addArgument([
+                $container->get(RequestBuilderMiddleware::class),
+                $container->get(SendRequestsMiddleware::class),
+                $container->get(DTOMapperMiddleware::class),
+            ]);
     }
 
     /**
