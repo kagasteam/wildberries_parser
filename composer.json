@@ -9,7 +9,7 @@
         "cakephp/cakephp": "^4.5.0",
         "cakephp/migrations": "^3.7",
         "cakephp/plugin-installer": "^1.3",
-        "eggheads/cakephp-clickhouse": "^1.20",
+        "eggheads/cakephp-clickhouse": "^2.0",
         "mobiledetect/mobiledetectlib": "^3.74",
         "smi2/phpclickhouse": "^1.5"
     },

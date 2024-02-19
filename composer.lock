@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f90b67107419618897d6e24aaf81bc35",
+    "content-hash": "a3d966337c47cec989e0c1520b5714b4",
     "packages": [
         {
             "name": "cakephp/cakephp",
@@ -364,24 +364,23 @@
         },
         {
             "name": "eggheads/cakephp-clickhouse",
-            "version": "1.20",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.eggheads.solutions/eggheadssolutions/backend/library/cakephp-clickhouse.git",
-                "reference": "f8182777da3cd7578c7f3f68c0cc234d65fb9959"
+                "reference": "0edf09a41095b1746ab83d9ff7ecfbb6bdc1e3a2"
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=8.0 || >=7.4",
+                "php": "^7.4 || ^8.0",
                 "smi2/phpclickhouse": "^1.5"
             },
             "require-dev": {
-                "cakephp/cakephp": "^4.3",
-                "cakephp/debug_kit": "^4.7",
-                "eggheads/eggheads-code-style": "^2.1",
-                "eggheads/mocks": "^1.0",
-                "mheap/phpunit-github-actions-printer": "^1.5",
-                "phpunit/phpunit": "^9.5"
+                "cakephp/cakephp": "^3.9 || ^4.4 || ^5.0",
+                "cakephp/debug_kit": "^3.17 || ^4.9 || ^5.0",
+                "eggheads/eggheads-code-style": "^3.0",
+                "eggheads/mocks": "^2.0",
+                "phpunit/phpunit": "^9.6 || ^10.1"
             },
             "type": "library",
             "autoload": {
@@ -420,7 +419,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2023-07-13T14:24:11+00:00"
+            "time": "2024-02-12T10:55:42+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -1247,16 +1246,16 @@
         },
         {
             "name": "smi2/phpclickhouse",
-            "version": "1.5.1",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smi2/phpClickHouse.git",
-                "reference": "14606e47fa7208e58976569e223f02fe719b4cd9"
+                "reference": "66128bf187755d617fce23076b1c9aca2a2cb64e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smi2/phpClickHouse/zipball/14606e47fa7208e58976569e223f02fe719b4cd9",
-                "reference": "14606e47fa7208e58976569e223f02fe719b4cd9",
+                "url": "https://api.github.com/repos/smi2/phpClickHouse/zipball/66128bf187755d617fce23076b1c9aca2a2cb64e",
+                "reference": "66128bf187755d617fce23076b1c9aca2a2cb64e",
                 "shasum": ""
             },
             "require": {
@@ -1300,9 +1299,9 @@
             ],
             "support": {
                 "issues": "https://github.com/smi2/phpClickHouse/issues",
-                "source": "https://github.com/smi2/phpClickHouse/tree/1.5.1"
+                "source": "https://github.com/smi2/phpClickHouse/tree/1.5.3"
             },
-            "time": "2023-05-24T17:01:13+00:00"
+            "time": "2024-01-18T11:08:36+00:00"
         },
         {
             "name": "symfony/config",
@@ -5986,5 +5985,5 @@
         "php": ">=7.4"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
